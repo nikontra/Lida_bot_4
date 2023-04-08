@@ -1,27 +1,24 @@
 import logging
-import os
 
-from dotenv import load_dotenv
 from telegram import InlineQueryResultArticle, InputTextMessageContent, Update
 from telegram.ext import (ApplicationBuilder, CommandHandler, ContextTypes,
                           InlineQueryHandler, MessageHandler, filters)
 
-load_dotenv()
+from lida_bot_4.template import render_template
+
+from lida_bot_4 import config
+
+
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
 
-
-TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
-OWNER_ID = os.getenv('OWNER_ID')
-
-
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text="I'm a bot, please talk to me!"
+        text=render_template("start.j2")
     )
 
 
@@ -63,7 +60,7 @@ async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def main():
-    application = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+    application = ApplicationBuilder().token(config.TELEGRAM_TOKEN).build()
 
     start_handler = CommandHandler('start', start)
     caps_handler = CommandHandler('caps', caps)
