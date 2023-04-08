@@ -1,14 +1,10 @@
 import logging
 
+import config
 from telegram import InlineQueryResultArticle, InputTextMessageContent, Update
 from telegram.ext import (ApplicationBuilder, CommandHandler, ContextTypes,
                           InlineQueryHandler, MessageHandler, filters)
-
-from lida_bot_4.template import render_template
-
-from lida_bot_4 import config
-
-
+from template import render_template
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',

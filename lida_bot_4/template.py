@@ -1,8 +1,7 @@
 import re
 
+import config
 import jinja2
-
-from lida_bot_4 import config
 
 
 def render_template(template_name: str, data: dict | None = None) -> str:
