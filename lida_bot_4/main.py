@@ -1,10 +1,10 @@
 import logging
 
 import config
+import messages
 from telegram import InlineQueryResultArticle, InputTextMessageContent, Update
 from telegram.ext import (ApplicationBuilder, CommandHandler, ContextTypes,
                           InlineQueryHandler, MessageHandler, filters)
-from template import render_template
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -14,7 +14,7 @@ logging.basicConfig(
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text=render_template("start.j2")
+        text=messages.GREETINGS
     )
 
 
